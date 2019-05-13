@@ -1,0 +1,107 @@
+{% import 'legend_entry_macro.html' as le %}
+
+{% for record in records %}
+{% set results = results_by_record_id[record.id] %}
+{% for region in record.regions %}
+<div class="page" id='{{region.anchor_id}}'>
+  <h3> {{record.seq_record.name}} - Region {{region.get_region_number()}} - {{region.get_product_string() | capitalize }}</h3>
+ <div class="region-grid">
+  <div class = "content">
+    <div class ="description-container">
+      <div class="region-download">
+        <a href = {{ '%s.region%03d.gbk' % (record.id, region.get_region_number()) }}>Download region GenBank file</a>
+      </div>
+      <div class = 'description-text'>
+        {{region.description_text()}}
+        <a class="cluster-rules-header" id="{{region.anchor_id}}-rules-header" href="#{{region.anchor_id}}">Show pHMM detection rules used</a>
+        {% if region.contig_edge %}
+          <div class="contig-edge-warning">Region on contig edge.</div>
+        {% endif %}
+      </div>
+      <div class="cluster-rules" id="{{region.anchor_id}}-rules">
+        {{- region.detection_rules|join('<br>'|safe) -}}
+      </div>
+      <div class="region-svg-container">
+       <div id='{{region.anchor_id}}-svg'>
+       </div>
+      </div>
+    </div>
+    <div class="legend">
+      <h4>Legend:</h4>
+      <div class="legend-items">
+        {{le.legend('legend-type-biosynthetic', 'core biosynthetic genes')}}
+        {{le.legend('legend-type-biosynthetic-additional', 'additional biosynthetic genes')}}
+        {{le.legend('legend-type-transport', 'transport-related genes')}}
+        {{le.legend('legend-type-regulatory', 'regulatory genes')}}
+        {{le.legend('legend-type-resistance', 'resistance genes')}}
+        {{le.legend('legend-type-other', 'other genes')}}
+        {% if (options.tta_enabled or not options.minimal) and record.get_gc_content() >= options.tta_threshold %}
+            {{le.legend('legend-tta-codon', 'TTA codon')}}
+        {% endif %}
+        {% if options.cassis %}
+            {{le.legend('legend-border-cassis', 'cluster extent as predicted by CASSIS')}}
+        {% endif %}
+        {% if options.cf_create_clusters or options.cf_borders_only %}
+            {{le.legend('legend-border-clusterfinder', 'cluster extent as predicted by ClusterFinder')}}
+        {% endif %}
+      </div>
+    </div>
+    <div class="zoom-buttons">
+      <div class="button-like zoom-button zoom-reset"><img src="images/expand-arrows-alt-solid.svg" alt="reset zoom">reset view</div>
+      <div class="button-like zoom-button zoom-in"><img src="images/search-solid.svg" alt="zoom">zoom to selection</div>
+    </div>
+  </div>
+
+  <div class="focus-panel">
+    <h3>Gene details</h3>
+    <div class="focus-panel-content focus-panel-content-{{region.anchor_id}}">
+        <div style="text-align: center; margin-top: 30%;">
+            Select a gene to view the details available for it
+        </div>
+    </div>
+  </div>
+
+  {% set all_module_sections = sections[record.id][region.get_region_number()] %}
+  <div class="body-details">
+    <div class="body-details-headers">
+    {% for module_sections in all_module_sections %}
+     {% for section in module_sections.detail_sections %}
+      <div class="body-details-header {{region.anchor_id}}-{{section.class_name}}" data-name="{{region.anchor_id}}-{{section.class_name}}">
+        {{section.label}}
+      </div>
+     {% endfor %}
+    {% endfor %}
+    </div>
+    {% for module_sections in all_module_sections %}
+     {% for section in module_sections.detail_sections %}
+    <div class="body-details-section {{region.anchor_id}}-{{section.class_name}}">
+      {{section.content}}
+    </div>
+     {% endfor %}
+    {% endfor %}
+  </div>
+
+  <div class="sidepanel">
+    <div class="sidepanel-details-headers">
+    {% for module_sections in all_module_sections %}
+     {% for section in module_sections.sidepanel_sections %}
+      <div class="sidepanel-details-header {{region.anchor_id}}-{{section.class_name}}" data-name="{{region.anchor_id}}-{{section.class_name}}">
+        {{section.label}}
+      </div>
+     {% endfor %}
+    {% endfor %}
+    </div>
+    {% for module_sections in all_module_sections %}
+     {% for section in module_sections.sidepanel_sections %}
+    <div class="sidepanel-details-section {{region.anchor_id}}-{{section.class_name}}">
+      {{section.content}}
+    </div>
+     {% endfor %}
+    {% endfor %}
+  </div>
+
+ </div>
+
+</div>
+{% endfor %}
+{% endfor %}

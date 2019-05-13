@@ -1,0 +1,18 @@
+#                                                                                   --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name               accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#       ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+P45745_A1_gly               -            511 AMP-binding          PF00501.21   418  2.7e-131  426.3   0.0   1   1  3.2e-131  3.2e-131  426.0   0.0     2   418    42   441    41   441 0.98 -
+Q9L8H4_A1_4__pro            -            526 AMP-binding          PF00501.21   418  3.4e-124  402.9   0.0   1   1  4.7e-124  4.7e-124  402.4   0.0     2   418    44   451    43   451 0.99 -
+YP_003712466.1_562_mod1_val -            424 AMP-binding          PF00501.21   418  2.4e-119  386.9   0.0   1   1  2.7e-119  2.7e-119  386.8   0.0     1   418    10   408    10   408 0.97 -
+Q93N87_A1_hpg|hpg2cl        -            514 AMP-binding          PF00501.21   418  1.3e-109  354.9   0.4   1   1  1.6e-109  1.6e-109  354.6   0.4     1   418    49   444    49   444 0.96 -
+Q54298_A1_pip               -            497 AMP-binding          PF00501.21   418   1.9e-98  318.0   0.0   1   1   2.3e-98   2.3e-98  317.8   0.0     1   418    27   428    27   428 0.96 -
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      /Users/robi0916/Documents/Wageningen_UR/github/adenylpred/adenylpred/data/AMP-binding.hmm
+# Target file:     data/test5.faa
+# Option settings: hmmsearch --domtblout temp.out --domT 50 --cpu 3 /Users/robi0916/Documents/Wageningen_UR/github/adenylpred/adenylpred/data/AMP-binding.hmm data/test5.faa 
+# Current dir:     /Users/robi0916/Documents/Wageningen_UR/github/adenylpred/adenylpred
+# Date:            Mon May 13 12:11:48 2019
+# [ok]

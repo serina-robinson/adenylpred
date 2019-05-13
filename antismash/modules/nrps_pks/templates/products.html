@@ -1,0 +1,47 @@
+<div class="structure">
+  {% if region.has_any_polymer() %}
+    <div class="heading">Predicted core structure(s)</div>
+    {% for supercluster in region.superclusters %}
+      {% if supercluster.smiles or supercluster.polymer %}
+        <div>
+          <div class="prediction-text">
+            For supercluster {{supercluster.number}}, location {{supercluster.location.start}} - {{supercluster.location.end}}:
+          {{collapser_start("SC%s" % supercluster.number, level="supercluster")}}
+          {% if supercluster.smiles %}
+            <canvas id="smiles-canvas-{{region.anchor_id}}-{{supercluster.number}}" class="smiles-canvas" data-smiles="{{supercluster.smiles}}"></canvas>
+            <div class="as-structure-warning">
+              {{supercluster.get_warning()}}
+            </div>
+          {% endif %}
+          {% if supercluster.polymer %}
+            <div>
+              <dl>
+                <dt><b>Polymer prediction:</b></dt><dd>{{supercluster.polymer}}</dd>
+              </dl>
+              <br>Direct lookup in NORINE database:
+              <a href="{{supercluster.get_norine_url()}}" target="_new">strict</a>
+                or
+              <a href="{{supercluster.get_norine_url(be_strict = False)}}" target="_new">relaxed</a><br>
+            </div>
+            {% endif %}
+            {{collapser_end()}}
+            </div>
+        </div>
+        {% if supercluster.smiles %}
+            <div id="smiles-canvas-{{region.anchor_id}}-{{supercluster.number}}-modal" class="modal-container">
+              <div class="modal-content">
+                <canvas class="smiles-canvas-modal" data-smiles="{{supercluster.smiles}}"></canvas>
+              </div>
+            </div>
+        {% endif %}
+      {% if loop.index < region.superclusters | length %}
+        <hr>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+    <div class="prediction-text">
+      <br>
+      <a href="http://bioinfo.lifl.fr/norine/form2.jsp" target="_new">Link to NORINE database query form</a>
+    </div>
+  {% endif %}
+</div>
