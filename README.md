@@ -1,4 +1,3 @@
-# adenylpred
 AdenylPred
 ===========
 Substrate and function prediction tool for class I adenylate-forming enzymes.
@@ -6,6 +5,8 @@ Substrate and function prediction tool for class I adenylate-forming enzymes.
 Class I adenylate-forming enzymes including acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. They are critical for 
 
 As the number of sequences for adenylate-forming enzymes in databases far outnumber our capacity for experimental characterization, there is a need for adenylation enzyme substrate prediction tools. As a result, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence.
+
+This tool is the product of a collaboration between Dr. Larry Wackett’s lab at the University of Minnesota and Dr. Marnix Medema’s lab at Wageningen University and Research, the Netherlands. It is supported a National Science Foundation Graduate Research Fellowship under Grant No. 00039202. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 Installation
 ------------
