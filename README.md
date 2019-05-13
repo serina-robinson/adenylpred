@@ -2,13 +2,13 @@ AdenylPred
 ===========
 Substrate and function prediction tool for class I adenylate-forming enzymes.
 
-Class I adenylate-forming enzymes including acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. They are critical for 
+Class I adenylate-forming enzymes including acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
 
 As the number of sequences for adenylate-forming enzymes in databases far outnumber our capacity for experimental characterization, there is a need for adenylation enzyme substrate prediction tools. As a result, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence.
 
 Installation
 ------------
-For running small queries (< 50 sequences), a lightweight web application version of AdenylPred is available at z.umn.edu/adenylpred. For computationally-intensive queries we request use of the command line version.
+For running small queries (< 50 sequences), a lightweight web application version of AdenylPred is available at [z.umn.edu/adenylpred](z.umn.edu/adenylpred). For computationally-intensive queries we request use of the command line version.
 
 Prerequisite software and packages:
 * python (version 3.7.3 tested, any version >= 3.5.0 should work)
