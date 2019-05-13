@@ -8,6 +8,8 @@ As the number of sequences for adenylate-forming enzymes in databases far outnum
 
 Installation
 ------------
+For running small queries (< 50 sequences), a lightweight web application version of AdenylPred is available at z.umn.edu/adenylpred. For computationally-intensive queries we request use of the command line version.
+
 Prerequisite software and packages:
 * python (version 3.7.3 tested, any version >= 3.5.0 should work)
 * python-virtualenv (not needed, but highly recommended)
@@ -30,7 +32,7 @@ cd adenylpred
 
 Or, from github.com, click the "clone or download" button and "Download ZIP"
 
-Next, all python dependencies are specified in the `setup.py` file
+All python dependencies are specified in the `setup.py` file
 
 Acknowledgements
 -------
