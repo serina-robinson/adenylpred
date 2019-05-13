@@ -32,6 +32,8 @@ cd adenylpred
 
 Or, from github.com, click the "clone or download" button and "Download ZIP"
 
+Next, all python dependencies are specified in the `setup.py` file
+
 License
 -------
 AdenylPred is an open source tool available under the GNU Affero General Public
