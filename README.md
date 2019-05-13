@@ -22,7 +22,8 @@ Create a python virtualenv for installing AdenylPred dependencies
 python3 -m venv /path/to/new/virtual/env
 ``` 
 OR if you are using conda:
-```conda create --name /path/to/new/virtual/env
+```
+conda create --name /path/to/new/virtual/env
 ```
 Then activate your environment using
 ```
