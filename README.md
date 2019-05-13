@@ -16,23 +16,43 @@ Prerequisite software and packages:
 * [muscle](http://www.drive5.com/muscle/downloads.htm) (version 3.8.1551 tested) or if you have conda installed you can use `conda install -c bioconda muscle `
 * [hmmer3](http://hmmer.org/) (version 3.2.1 tested) or if you have conda installed you can use `conda install -c biocore hmmer`
 
-First, we recommend you create a python virtualenv for installing AdenylPred dependencies
+Create a python virtualenv for installing AdenylPred dependencies
 
 ```
-virtualenv --python $(which python3) adenylpred_env
-source activate adenylpred_env
+python3 -m venv /path/to/new/virtual/env
+``` 
+OR if you are using conda:
+```conda create --name /path/to/new/virtual/env
+```
+Then activate your environment using
+```
+source activate /path/to/new/virtual/env
 ```
 
 Next obtain a copy of AdenylPred source code. You will need to clone the AdenylPred git repository:
 
 ```
-git clone https://github.com/serina-robinson/adenylpred/adenylpred.git
+git clone https://github.com/serina-robinson/adenylpred.git
 cd adenylpred
 ```
 
 Or, from github.com, click the "clone or download" button and "Download ZIP"
 
-All python dependencies are specified in the `setup.py` file
+All python dependencies are specified in the `requirements.txt` file which can be downloaded 
+
+You can then run adenylpred as follows:
+
+```
+usage: adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
+
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Input file (FASTA format).
+  -o OUTPUT, --output OUTPUT
+                        Output file directory. Default is stdout
+  -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
+                        [0|1 extract AMP-binding domains?].
+```
 
 Acknowledgements
 -------
