@@ -128,7 +128,7 @@ if __name__ == "__main__":
     # Optional: extract AMP-binding hits from a FASTA file
     """
     Arguments:
-        fastafile: FASTA file of all sequences in MIBiG from your BGCs of interest
+        fastafile: FASTA file 
         hmmfile: AMP-binding.hmm
         outfile: path for output FASTA file
         size_threshold: threshold for the minimum size so you don't get truncated domains (recommendation is 50 - 100)
