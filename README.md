@@ -6,6 +6,8 @@ Class I adenylate-forming enzymes have diverse functions including the acyl-CoA 
 
 The number of adenylate-forming enzymes in sequence databases (>700,000) far outnumber our capacity to experimentally characterize them. Since these enzymes activate a variety of fatty, aryl, and amino acid precursors in biosynthetic pathways, prediction of substrate can help inform the downstream metabolites. To meet this challenge, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence.
 
+![](https://github.com/serina-robinson/adenylpred/blob/master/data/ml_workflow.png)
+
 Installation
 ------------
 For running small queries (<50 sequences), an AdenylPred web app is available at [z.umn.edu/adenylpred](z.umn.edu/adenylpred). For computationally-intensive queries we request use of the command-line version here.
@@ -56,7 +58,7 @@ usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
                         Output file directory. Default is stdout
   -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
                         [1 = extract AMP-binding hits using AMP-binding.hmm
-                         0 = AMP-binding domains already extracted].
+                         0 = AMP-binding domains already extracted]
 ```
 
 Acknowledgements
