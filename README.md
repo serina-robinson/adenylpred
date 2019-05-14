@@ -56,7 +56,7 @@ usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
                         Output file directory. Default is stdout
   -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
                         [1 = extract AMP-binding hits using AMP-binding.hmm
-                         0 = don't need to extract AMP-binding domains].
+                         0 = AMP-binding domains already extracted].
 ```
 
 Acknowledgements
