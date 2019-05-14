@@ -52,9 +52,9 @@ HMM_FILE = "%s/data/AMP-binding.hmm" % parent_folder
 
 class PredictRFResult():
     def __init__(self, seqname, prediction, probability):
-        self.name = seqname
-        self.prediction = prediction
-        self.probability = probability
+    	self.name = seqname
+    	self.prediction = prediction
+    	self.probability = probability
 
     def write_result(self, out_file):
         out_file.write("%s\t%s\t%.3f\n" % \
