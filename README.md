@@ -61,9 +61,29 @@ usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
                          0 = AMP-binding domains already extracted]
 ```
 
+Example Usages
+--------------
+
+Predict substrates of A domains from a complete biosynthetic gene cluster FASTA file
+```
+python3 adenylpred.py -i examples/lipstatin.fasta -o lipstatin_predictions.txt
+```
+
+Predict substrates for example NRPS sequences where the AMP-binding domains have already been extracted
+```
+python3 adenylpred.py -i examples/test5.fasta -x 0
+```
+
 Acknowledgements
 -------
 This tool is the product of a collaboration between Dr. Larry Wackett’s lab at the University of Minnesota and Dr. Marnix Medema’s lab at Wageningen University and Research, the Netherlands. It is supported a National Science Foundation Graduate Research Fellowship under Grant No. 00039202. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+
+Key contributors
+-------
+* Serina Robinson (robi0916@umn.edu)
+* Barbara Terlouw
+* Marnix Medema
+* Larry Wackett
 
 License
 -------
