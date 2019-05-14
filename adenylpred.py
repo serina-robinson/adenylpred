@@ -34,6 +34,7 @@ from lib.make_test_set import *
 from lib.test_classifier import *
 from lib.hmmsearch_domains import *
 from lib.get_34_aa_signature import *
+from lib.gbk_to_faa import *
 
 from antismash.common.secmet import AntismashDomain, FeatureLocation
 from antismash.common import path, subprocessing
@@ -51,9 +52,9 @@ HMM_FILE = "%s/data/AMP-binding.hmm" % parent_folder
 
 class PredictRFResult():
     def __init__(self, seqname, prediction, probability):
-    	self.name = seqname
-    	self.prediction = prediction
-    	self.probability = probability
+        self.name = seqname
+        self.prediction = prediction
+        self.probability = probability
 
     def write_result(self, out_file):
         out_file.write("%s\t%s\t%.3f\n" % \
@@ -61,9 +62,10 @@ class PredictRFResult():
 
 def define_arguments() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description = "Run random forest prediction.")
-    parser.add_argument("-i", "--input", required = True, type = str, help = "Input file (FASTA format).")
+    parser.add_argument("-i", "--input", required = True, type = str, help = "Input file (FASTA or GenBank format).")
     parser.add_argument("-o", "--output", required = False, type = str, help = "Output file directory. Default is stdout")
-    parser.add_argument("-x", "--xtract_A_domains", required = False, default = 1, type = int, help = "[0|1 extract AMP-binding domains?].")
+    parser.add_argument("-x", "--xtract_A_domains", required = False, default = 1, type = int, help = "[1 = extract AMP-binding hits using AMP-binding.hmm \n 0 = AMP-binding domains already extracted]")
+    parser.add_argument("-n", "--nucleotide_sequence", required = False, default = 0, type = int, help = "[1 = Nucleotide sequence \n 0 = Amino acid sequence]")
     return parser
 
 def get_feature_matrix(fasta_dir: str, properties: Dict[str, PhysicochemicalProps]) -> Tuple[List[List[float]], List[str]]:
@@ -124,8 +126,35 @@ def make_prediction(fasta_dir):
 if __name__ == "__main__":
     parser = define_arguments()
     args = parser.parse_args()
-
     fasta_dir = args.input
+
+    if fasta_dir.lower().endswith('.gbk'):
+        out_file = "%s/data/gbk_to_fasta.faa" % parent_folder
+        faa_converted = gbk_to_faa(fasta_dir, out_file)
+        print(faa_converted)
+        fasta_dir = faa_converted
+
+    if args.nucleotide_sequence == 1:
+        print("##### Error: translating nucleotides to amino acid sequences has not been implemented yet. Please input an amino acid sequence. #####")
+        sys.exit(1)
+
+    if args.xtract_A_domains == 1:
+        print("##### Extracting AMP-binding domains... #####")
+        out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
+
+        try:
+           xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
+        except:
+            print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk)")
+            sys.exit(1)
+    elif args.xtract_A_domains == 0:
+        out_file = fasta_dir
+
+    try:
+        create_domain_fa = fasta.read_fasta(out_file)
+    except:
+        print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk)")
+        sys.exit(1)
 
     # Optional: extract AMP-binding hits from a FASTA file
     """
@@ -136,14 +165,9 @@ if __name__ == "__main__":
         size_threshold: threshold for the minimum size so you don't get truncated domains (recommendation is 50 - 100)
     """
 
-    if args.xtract_A_domains == 1:
-        print("##### Extracting AMP-binding domains... #####")
-        out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
-        xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
-
     # Create antiSMASH-like domain objects from AMP-binding hits
     domain_list = []
-    create_domain_fa = fasta.read_fasta(fasta_dir)
+    
     for i, domain in enumerate(create_domain_fa):
         domain_list.append(AntismashDomain(FeatureLocation(1, 1, 1), tool="test")) # arbitrary feature location for testing
         domain_list[i].domain_id = list(create_domain_fa.keys())[i]
@@ -164,7 +188,7 @@ if __name__ == "__main__":
 
     print("##### \n Making predictions... #####")
     results = make_prediction(new_path)
-    print("Query_name\tPrediction\tProbability")
+    print("Query_name\tPrediction\tProbability_score")
     for x in range(len(results)):
         print("%s\t%s\t%.3f\n" % \
         (results[x].name, results[x].prediction, results[x].probability))
@@ -172,7 +196,7 @@ if __name__ == "__main__":
     
     if args.output is not None:
         with open(args.output, 'w') as output_file:
-             output_file.write("Query_name\tPrediction\tProbability")
+             output_file.write("Query_name\tPrediction\tProbability_score")
              output_file.write("\n")
              for result in results:
                 result.write_result(output_file)

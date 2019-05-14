@@ -565,7 +565,7 @@ def extract_features(property_dict: Dict[str, PhysicochemicalProps], sequence: s
     return property_vector
 
 def extract_specificity(fasta_ID: str) -> str:
-    specificity = fasta_ID.split('_')[1]
+    specificity = "unknown" #fasta_ID.split('_')[1]
     specificity = specificity.lower()
 
     if '|' in specificity:
@@ -623,7 +623,7 @@ def get_feature_matrix(fasta_dir: str, properties: Dict[str, PhysicochemicalProp
     for ID in fasta_dict:
         if selected_sequences[ID]:
             sequence = fasta_dict[ID]
-            specificity = extract_specificity(ID)
+            specificity = "unknown" #extract_specificity(ID
             property_vector = extract_features(properties, sequence)
             features.append(property_vector)
             response.append(specificity)
@@ -667,7 +667,8 @@ def write_to_file(property_dict, fasta_dir):
     
     for ID in fasta_dict:
         sequence = fasta_dict[ID]
-        specificity = extract_specificity(ID)
+        # specificity = extract_specificity(ID)
+        specificity = "unknown"
         property_vector = extract_features(property_dict, sequence)
         
         out_file.write("%s\t%s" % (ID, specificity))
