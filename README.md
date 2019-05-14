@@ -41,7 +41,7 @@ Or, from github.com, click the "clone or download" button and "Download ZIP"
 
 All python dependencies are specified in the `requirements.txt` file. To load all the requirements simply run:
 ```
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 You can then run adenylpred as follows:
@@ -55,7 +55,8 @@ usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
   -o OUTPUT, --output OUTPUT
                         Output file directory. Default is stdout
   -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
-                        [0|1 extract AMP-binding domains?].
+                        [1 = extract AMP-binding hits using AMP-binding.hmm
+                         0 = don't need to extract AMP-binding domains].
 ```
 
 Acknowledgements
