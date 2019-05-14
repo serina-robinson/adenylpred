@@ -49,16 +49,19 @@ pip install -r requirements.txt
 You can then run adenylpred as follows:
 
 ```
-usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
+usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS] [-n NUCLEOTIDE_SEQUENCE]
 
+optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        Input file (FASTA format).
+                        Input file (FASTA or GenBank format).
   -o OUTPUT, --output OUTPUT
                         Output file directory. Default is stdout
   -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
-                        [1 = extract AMP-binding hits using AMP-binding.hmm
-                         0 = AMP-binding domains already extracted]
+                        [1 = extract AMP-binding hits using AMP-binding.hmm |
+                        0 = AMP-binding domains already extracted]
+  -n NUCLEOTIDE_SEQUENCE, --nucleotide_sequence NUCLEOTIDE_SEQUENCE
+                        [1 = Nucleotide sequence | 0 = Amino acid sequence]
 ```
 
 Example Usages
