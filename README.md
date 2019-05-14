@@ -8,7 +8,7 @@ The number of adenylate-forming enzymes in sequence databases (>700,000) far out
 
 Installation
 ------------
-For running small queries (< 50 sequences), an AdenylPred web app is available at [z.umn.edu/adenylpred](z.umn.edu/adenylpred). For computationally-intensive queries we request use of the command-line version here.
+For running small queries (<50 sequences), an AdenylPred web app is available at [z.umn.edu/adenylpred](z.umn.edu/adenylpred). For computationally-intensive queries we request use of the command-line version here.
 
 Prerequisite software and packages:
 * python (version 3.7.3 tested, any version >= 3.5.0 should work)
