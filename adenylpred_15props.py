@@ -49,6 +49,13 @@ ADOMAINS_FILENAME = "%s/data/A_domains_muscle.fasta" % parent_folder
 START_POSITION = 66
 HMM_FILE = "%s/data/AMP-binding.hmm" % parent_folder
 
+def define_arguments() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description = "Run random forest prediction.")
+    parser.add_argument("-i", "--input", required = True, type = str, help = "Input file (FASTA format).")
+    parser.add_argument("-o", "--output", required = False, type = str, help = "Output file directory. Default is stdout")
+    parser.add_argument("-x", "--xtract_A_domains", required = False, default = 1, type = int, help = "[0|1 extract AMP-binding domains?].")
+    return parser
+
 class PredictRFResult():
     def __init__(self, seqname, prediction, probability):
     	self.name = seqname
@@ -58,13 +65,6 @@ class PredictRFResult():
     def write_result(self, out_file):
         out_file.write("%s\t%s\t%.3f\n" % \
                        (self.name, self.prediction, self.probability))
-
-def define_arguments() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description = "Run random forest prediction.")
-    parser.add_argument("-i", "--input", required = True, type = str, help = "Input file (FASTA format).")
-    parser.add_argument("-o", "--output", required = False, type = str, help = "Output file directory. Default is stdout")
-    parser.add_argument("-x", "--xtract_A_domains", required = False, default = 1, type = int, help = "[0|1 extract AMP-binding domains?].")
-    return parser
 
 def get_feature_matrix(fasta_dir: str, properties: Dict[str, PhysicochemicalProps]) -> Tuple[List[List[float]], List[str]]:
     fasta_dict = fasta.read_fasta(fasta_dir)
