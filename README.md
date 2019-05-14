@@ -16,7 +16,7 @@ Prerequisite software and packages:
 * python (version 3.7.3 tested, any version >= 3.5.0 should work)
 * python-virtualenv (not needed, but highly recommended)
 * [muscle](http://www.drive5.com/muscle/downloads.htm) (version 3.8.1551 tested) or if you have conda installed you can use `conda install -c bioconda muscle `
-* [hmmer3](http://hmmer.org/) (version 3.2.1 tested) or if you have conda installed you can use `conda install -c biocore hmmer`
+* [hmmer3](http://hmmer.org/) (version-3.1b2 tested) or if you have conda installed you can use `conda install -c biocore hmmer`
 
 Create a python virtualenv for installing AdenylPred dependencies
 
