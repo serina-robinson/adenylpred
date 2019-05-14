@@ -30,7 +30,7 @@ Then activate your environment using
 source activate /path/to/new/virtual/env
 ```
 
-Next obtain a copy of AdenylPred source code. You will need to clone the AdenylPred git repository:
+Next navigate to a location on your local drive where you would like AdenylPred instaled. Obtain a copy of AdenylPred source code. You will need to clone the AdenylPred git repository:
 
 ```
 git clone https://github.com/serina-robinson/adenylpred.git
@@ -47,7 +47,7 @@ pip3 install -r requirements.txt
 You can then run adenylpred as follows:
 
 ```
-usage: adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
+usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS]
 
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
