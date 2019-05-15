@@ -32,7 +32,7 @@ Then activate your environment using
 source activate /path/to/new/virtual/env
 ```
 
-Next navigate to a location on your local drive where you would like AdenylPred instaled. Obtain a copy of AdenylPred source code. You will need to clone the AdenylPred git repository:
+Next navigate to a location on your local drive where you would like AdenylPred installed. To obtain a copy of the AdenylPred source code you will need to clone the AdenylPred git repository:
 
 ```
 git clone https://github.com/serina-robinson/adenylpred.git
@@ -46,7 +46,7 @@ All python dependencies are specified in the `requirements.txt` file. To load al
 pip install -r requirements.txt
 ```
 
-You can then run adenylpred as follows:
+You should then be able to run adenylpred as follows:
 
 ```
 usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS] [-n NUCLEOTIDE_SEQUENCE]
@@ -64,6 +64,8 @@ optional arguments:
                         [1 = Nucleotide sequence | 0 = Amino acid sequence]
 ```
 
+Common issues include not having hmmer3 or muscle installed, so please check the dependencies before using AdenylPred.
+
 Example Usages
 --------------
 
@@ -75,6 +77,11 @@ python3 adenylpred.py -i examples/lipstatin.fasta -o lipstatin_predictions.txt
 Predict substrates for example NRPS sequences where the AMP-binding domains have already been extracted
 ```
 python3 adenylpred.py -i examples/test5.fasta -x 0
+```
+
+Predict substrates for AMP-binding enzymes in a nucleotide FASTA file
+```
+python3 adenylpred.py -i examples/lipstatin_nucleotide.fasta -x 1 -n 1
 ```
 
 Acknowledgements
