@@ -50,25 +50,12 @@ def run_hmmsearch(query_hmmfile, fasta_file):
     results = list(SearchIO.parse(res_stream, 'hmmsearch3-domtab'))
     return results
 
-def read_fasta_file(fastafile):
-    "Get sequences from fasta file and store in dictionary"
-    infile = open(fastafile).read()
-    entries = infile.split(">")[1:]
-    fastadict = {} #Accession as key, sequence as value
-    for entry in entries:
-        accession = entry.partition("\n")[0].replace("\r","").partition(" ")[0]
-        #print accession
-        sequence = entry.partition("\n")[2].replace("\n","").replace("\r","")
-        #print sequence
-        fastadict[accession] = sequence
-    return fastadict
-
 def run_HMMer(hmmfile, fastafile):
     "Run HMMer to find start and end sites of AMP-binding domains"
     runresults = run_hmmsearch(hmmfile, fastafile)
     results_by_id = {}
     for runresult in runresults:
-        #Store results in dictionary by accession
+        # Store results in dictionary by accession
         for hsp in runresult.hsps:
             if not hsp.hit_id in results_by_id:
                 results_by_id[hsp.hit_id] = [hsp]
@@ -76,7 +63,7 @@ def run_HMMer(hmmfile, fastafile):
                 results_by_id[hsp.hit_id].append(hsp)
     return results_by_id
 
-def write_fasta(fastadict, outfile, hmmer_results, size_threshold, standalone=True):
+def write_hmm_fasta(fastadict, outfile, hmmer_results, size_threshold, standalone=True):
     #For each HMM, print a FASTA file with all domain hits
     domaindict = {}
     size_threshold = int(size_threshold)
@@ -103,13 +90,14 @@ def xtract_doms(fastafile, hmmfile, outfile, size_threshold, standalone=True):
     """Main function to extract domains from FASTA sequence"""
     #Read FASTA file
 
-    fastadict = read_fasta_file(fastafile)
+    # fastadict = read_fasta_file(fastafile)
+    fastadict = fasta.read_fasta(fastafile)
     
     #Run HMMer
     hmmer_results = run_HMMer(hmmfile, fastafile)
     #Write FASTA file with domains
     
-    domaindict = write_fasta(fastadict, outfile, hmmer_results, size_threshold, standalone)
+    domaindict = write_hmm_fasta(fastadict, outfile, hmmer_results, size_threshold, standalone)
     return domaindict
     
 
