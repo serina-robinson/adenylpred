@@ -12,6 +12,8 @@ from sklearn.ensemble import RandomForestClassifier
 from joblib import dump, load
 from collections import defaultdict
 from helperlibs.wrappers.io import TemporaryDirectory
+from Bio.Seq import Seq
+from Bio.Alphabet import IUPAC
 
 import random
 import argparse
@@ -121,7 +123,7 @@ def make_prediction(fasta_dir):
         result = PredictRFResult(seqname[i], prediction[i], probability[i])
         results.append(result)
 
-    return(results)
+    return results
 
 if __name__ == "__main__":
     parser = define_arguments()
@@ -135,8 +137,18 @@ if __name__ == "__main__":
         fasta_dir = faa_converted
 
     if args.nucleotide_sequence == 1:
-        print("##### Error: translating nucleotides to amino acid sequences has not been implemented yet. Please input an amino acid sequence. #####")
-        sys.exit(1)
+        try:
+            out_file = "%s/data/nuc_to_aa.faa" % parent_folder
+            seqs = fasta.read_fasta(fasta_dir)
+            translated = []
+            for seq in seqs.values():
+                aa = Seq(str(seq), IUPAC.unambiguous_dna)
+                translated.append(aa.translate())
+            fasta.write_fasta(seqs.keys(), translated, out_file)
+            fasta_dir = out_file
+        except:
+            print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk). \n If your input is a nucleotide sequence, please check the -n option is set to 1")
+            sys.exit(1)
 
     if args.xtract_A_domains == 1:
         print("##### Extracting AMP-binding domains... #####")
@@ -201,8 +213,3 @@ if __name__ == "__main__":
              for result in results:
                 result.write_result(output_file)
         output_file.close()
-    
-
-
-    
-
