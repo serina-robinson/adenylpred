@@ -18,18 +18,14 @@ Prerequisite software and packages:
 * [muscle](http://www.drive5.com/muscle/downloads.htm) (version 3.8.1551 tested) or if you have conda installed you can use `conda install -c bioconda muscle `
 * [hmmer3](http://hmmer.org/) (version-3.1b2 tested) or if you have conda installed you can use `conda install -c biocore hmmer`
 
-Create a python virtualenv for installing AdenylPred dependencies
+Create a python virtual environment for installing AdenylPred dependencies. If conda is not installed, see [venv documentation](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) for more information. If conda is install you can use the following commands: 
 
 ```
-python3 -m venv /path/to/new/virtual/env
-``` 
-OR if you are using conda:
+conda create --name adenylpred_env
 ```
-conda create --name /path/to/new/virtual/env
+Then activate your environment using:
 ```
-Then activate your environment using
-```
-source activate /path/to/new/virtual/env
+source activate adenylpred_env
 ```
 
 Next navigate to a location on your local drive where you would like AdenylPred installed. To obtain a copy of the AdenylPred source code you will need to clone the AdenylPred git repository:
