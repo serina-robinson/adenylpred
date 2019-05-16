@@ -24,6 +24,7 @@ import numpy
 import tqdm
 import sys
 import warnings
+import io
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -54,11 +55,12 @@ HMM_FILE = "%s/data/AMP-binding.hmm" % parent_folder
 
 
 def define_arguments() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description = "Run random forest prediction.")
+    parser = argparse.ArgumentParser(description = "Prediction tool for adenylate-forming enzyme substrate specificity")
     parser.add_argument("-i", "--input", required = True, type = str, help = "Input file (FASTA or GenBank format).")
     parser.add_argument("-o", "--output", required = False, type = str, help = "Output file directory. Default is stdout")
-    parser.add_argument("-x", "--xtract_A_domains", required = False, default = 1, type = int, help = "[1 = extract AMP-binding hits using AMP-binding.hmm | \n 0 = AMP-binding domains already extracted]")
-    parser.add_argument("-n", "--nucleotide_sequence", required = False, default = 0, type = int, help = "[1 = Nucleotide sequence | \n 0 = Amino acid sequence]")
+    parser.add_argument("-s", "--silent", required = False, action = "store_true", help = "Silences all progress updates to stdout")
+    parser.add_argument("-n", "--nucleotide", required = False, action = "store_true", help = "Nucleotide sequence")
+    parser.add_argument("-g", "--genbank_input", required = False, action = "store_true", help = "Input is in GenBank format")
     return parser
 
 class PredictRFResult():
@@ -114,7 +116,7 @@ def extract_features(property_dict: Dict[str, PhysicochemicalProps], sequence: s
 
     return property_vector
 
-def make_prediction(fasta_dir):
+def make_prediction(fasta_dir, silent):
     """ Makes a substrate prediction given an input of 34 active site residues
 
         Arguments:
@@ -133,7 +135,7 @@ def make_prediction(fasta_dir):
     probability = numpy.amax(rf_mod.predict_proba(features), axis = 1)
 
     results = []
-    for i,res in enumerate(tqdm.tqdm(prediction)):
+    for i,res in enumerate(tqdm.tqdm(prediction, disable = silent)):
         result = PredictRFResult(seqname[i], prediction[i], probability[i])
         results.append(result)
 
@@ -145,16 +147,21 @@ if __name__ == "__main__":
     parser = define_arguments()
     args = parser.parse_args()
     fasta_dir = args.input
+    silent = args.silent
+
+    # Suppress stdout 
+    if silent:
+        text_trap = io.StringIO()
+        sys.stdout = text_trap
 
     # Checks if GenBank file and converts to FASTA
-    if fasta_dir.lower().endswith('.gbk'):
+    if args.genbank_input:
         out_file = "%s/data/gbk_to_fasta.faa" % parent_folder
         faa_converted = gbk_to_faa(fasta_dir, out_file)
-        print(faa_converted)
         fasta_dir = faa_converted
 
     # Checks if nucleotide sequence and converts to amino acid
-    if args.nucleotide_sequence == 1:
+    if args.nucleotide:
         try:
             out_file = "%s/data/nuc_to_aa.faa" % parent_folder
             seqs = fasta.read_fasta(fasta_dir)
@@ -167,33 +174,23 @@ if __name__ == "__main__":
         except:
             print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk). \n If your input is a nucleotide sequence, please check the -n option is set to 1")
             sys.exit(1)
-    elif args.nucleotide_sequence == 0:
-        out_file = fasta_dir
-    else:
-        print("Invalid value for -n. Please check that the input value for -n is either 0 or 1")
-        sys.exit(1)
 
     # Extracts AMP-binding hits from a multi-FASTA file
-    if args.xtract_A_domains == 1:
+    if not silent:
         print("##### Extracting AMP-binding domains... #####")
-        out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
+    out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
 
-        try:
-           xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
-        except:
-            print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk)")
-            sys.exit(1)
-    elif args.xtract_A_domains == 0:
-        out_file = fasta_dir
-    else:
-        print("Invalid value for -x. Please check that the input value for -x is either 0 or 1")
-        sys.exit(1)
+    try:
+        xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
+    except:
+         print("Error: please check your file is a valid FASTA or GenBank file")
+         sys.exit(1)
 
     # Reads in file
     try:
         create_domain_fa = fasta.read_fasta(out_file)
     except:
-        print("Error: please check your file is a valid FASTA or GenBank file with the appropriate file suffix (.fasta, .faa, or .gbk)")
+        print("Error: please check your file is a valid FASTA or GenBank file")
         sys.exit(1)
 
     # Create antiSMASH-like domain objects from AMP-binding hits
@@ -207,8 +204,9 @@ if __name__ == "__main__":
     # Extract the active site residues
     res, nms, sqs = [], [], []
     new_path = "%s/data/34_aa_xtracted.fasta" % parent_folder
-    print("##### Extracting active site residues... #####")
-    for i, domain in enumerate(tqdm.tqdm(domain_list)):
+    if not silent:
+        print("##### Extracting active site residues... #####")
+    for i, domain in enumerate(tqdm.tqdm(domain_list, disable = silent)):
         res.append(get_34_aa_signature(domain))
         nms.append(domain.domain_id)
         sqs.append(res[i])
@@ -216,14 +214,17 @@ if __name__ == "__main__":
     fasta.write_fasta(nms, sqs, new_path)
     
     # Make predictions based on 34 active site residues
-    print("##### \n Making predictions... #####")
-    results = make_prediction(new_path)
+    if not silent:
+        print("##### \n Making predictions... #####")
+    results = make_prediction(new_path, silent = silent)
+
+    if silent:
+        sys.stdout = sys.__stdout__
     print("Query_name\tPrediction\tProbability_score")
     for x in range(len(results)):
         print("%s\t%s\t%.3f\n" % \
         (results[x].name, results[x].prediction, results[x].probability))
-    print("########################")
-    
+  
     # Write predictions to file
     if args.output is not None:
         with open(args.output, 'w') as output_file:

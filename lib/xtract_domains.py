@@ -95,8 +95,8 @@ def xtract_doms(fastafile, hmmfile, outfile, size_threshold, standalone=True):
     
     #Run HMMer
     hmmer_results = run_HMMer(hmmfile, fastafile)
-    #Write FASTA file with domains
     
+    #Write FASTA file with domains
     domaindict = write_hmm_fasta(fastadict, outfile, hmmer_results, size_threshold, standalone)
     return domaindict
     
