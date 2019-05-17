@@ -16,7 +16,7 @@ Prerequisite software and packages:
 * python (version 3.7.3 tested, any version >= 3.5.0 should work)
 * python-virtualenv (not needed, but highly recommended)
 * [muscle](http://www.drive5.com/muscle/downloads.htm) (version 3.8.1551 tested) or if you have conda installed you can use `conda install -c bioconda muscle `
-* [hmmer3](http://hmmer.org/) (version-3.1b2 tested) or if you have conda installed you can use `conda install -c biocore hmmer`
+* [hmmer2](http://hmmer.org/) (HMMER 2.3.2 tested) or if you have conda installed you can use `conda install -c bioconda hmmer2`
 
 Create a python virtual environment for installing AdenylPred dependencies. If conda is not installed, see [venv documentation](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) for more information. If conda is install you can use the following commands: 
 
@@ -45,22 +45,22 @@ pip install -r requirements.txt
 You should then be able to run adenylpred as follows:
 
 ```
-usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-x XTRACT_A_DOMAINS] [-n NUCLEOTIDE_SEQUENCE]
+usage: adenylpred.py [-h] -i INPUT [-o OUTPUT] [-s] [-n] [-g]
 
-optional arguments:
+Prediction tool for adenylate-forming enzyme substrate specificity
+
+arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
                         Input file (FASTA or GenBank format).
   -o OUTPUT, --output OUTPUT
                         Output file directory. Default is stdout
-  -x XTRACT_A_DOMAINS, --xtract_A_domains XTRACT_A_DOMAINS
-                        [1 = extract AMP-binding hits using AMP-binding.hmm |
-                        0 = AMP-binding domains already extracted]
-  -n NUCLEOTIDE_SEQUENCE, --nucleotide_sequence NUCLEOTIDE_SEQUENCE
-                        [1 = Nucleotide sequence | 0 = Amino acid sequence]
+  -s, --silent          Silences all progress updates to stdout
+  -n, --nucleotide      Nucleotide sequence
+  -g, --genbank_input   Input is in GenBank format
 ```
 
-Common issues include not having hmmer3 or muscle installed, so please check the dependencies before using AdenylPred.
+Common issues include not having hmmer2 or muscle installed, so please check the dependencies before using AdenylPred.
 
 Example Usages
 --------------
