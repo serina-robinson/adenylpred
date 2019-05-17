@@ -1,8 +1,8 @@
 AdenylPred
 ===========
-Welcome to AdenylPred! AdenylPred is a substrate and function prediction tool for class I adenylate-forming enzymes.
+Welcome to the AdenylPred development page. Please note the tool is currently in progress. For the most stable (production) version of AdenylPred, please go to the [AdenylPred](https://github.com/serina-robinson/adenylpred/) page. 
 
-Class I adenylate-forming enzymes have diverse functions including the acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
+AdenylPred is a substrate and function prediction tool for class I adenylate-forming enzymes. Class I adenylate-forming enzymes have diverse functions including the acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
 
 The number of adenylate-forming enzymes in sequence databases (>700,000) far outnumber our capacity to experimentally characterize them. Since these enzymes activate a variety of fatty, aryl, and amino acid precursors in biosynthetic pathways, prediction of substrate can help inform the chemical structure of downstream metabolites. To meet this challenge, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence.
 
@@ -70,14 +70,14 @@ Predict substrates of A domains from a complete biosynthetic gene cluster FASTA 
 python3 adenylpred.py -i examples/lipstatin.fasta -o lipstatin_predictions.txt
 ```
 
-Predict substrates for example NRPS sequences where the AMP-binding domains have already been extracted
-```
-python3 adenylpred.py -i examples/test5.fasta -x 0
-```
-
 Predict substrates for AMP-binding enzymes in a nucleotide FASTA file
 ```
-python3 adenylpred.py -i examples/lipstatin_nucleotide.fasta -x 1 -n 1
+python3 adenylpred.py -i examples/lipstatin_nucleotide.fasta -n
+```
+
+Predict substrates from a GenBank file
+```
+python3 adenylpred.py -i examples/daptomycin.gbk -g
 ```
 
 Acknowledgements
