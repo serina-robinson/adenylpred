@@ -1,6 +1,6 @@
 AdenylPred
 ===========
-Welcome to the AdenylPred development page. Please note the tool is currently in progress. For the most stable (production) version of AdenylPred, please go to the [AdenylPred](https://github.com/serina-robinson/adenylpred/) page. 
+Welcome to the AdenylPred development page. Please note the tool is currently in progress.
 
 AdenylPred is a substrate and function prediction tool for class I adenylate-forming enzymes. Class I adenylate-forming enzymes have diverse functions including the acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
 
