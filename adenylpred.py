@@ -60,6 +60,7 @@ def define_arguments() -> argparse.ArgumentParser:
     parser.add_argument("-o", "--output", required = False, type = str, help = "Output file directory. Default is stdout")
     parser.add_argument("-s", "--silent", required = False, action = "store_true", help = "Silences all progress updates to stdout")
     parser.add_argument("-n", "--nucleotide", required = False, action = "store_true", help = "Nucleotide sequence")
+    parser.add_argument("-x", "--do_not_xtract_domains", required = False, action = "store_true", help = "Do not extract AMP-binding domains with pHMM (already extracted)")
     parser.add_argument("-g", "--genbank_input", required = False, action = "store_true", help = "Input is in GenBank format")
     return parser
 
@@ -178,13 +179,17 @@ if __name__ == "__main__":
     # Extracts AMP-binding hits from a multi-FASTA file
     if not silent:
         print("##### Extracting AMP-binding domains... #####")
-    out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
+    
 
-    try:
-        xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
-    except:
-         print("Error: please check your file is a valid FASTA or GenBank file")
-         sys.exit(1)
+    if not args.do_not_xtract_domains:
+        out_file = "%s/data/AMP_binding_extracted.fasta" % parent_folder
+        try:
+            xtract_doms(fasta_dir, HMM_FILE, out_file, 50, True)
+        except:
+            print("Error: please check your file is a valid FASTA or GenBank file")
+            sys.exit(1)
+    else:
+        out_file = fasta_dir
 
     # Reads in file
     try:
@@ -212,7 +217,7 @@ if __name__ == "__main__":
         sqs.append(res[i])
 
     fasta.write_fasta(nms, sqs, new_path)
-    
+
     # Make predictions based on 34 active site residues
     if not silent:
         print("##### \n Making predictions... #####")
