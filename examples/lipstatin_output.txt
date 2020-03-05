@@ -1,0 +1,3 @@
+Query_name	Prediction	Probability_score
+AIT38300.1_LstC_Lipstatin_[none]	cinnamate.and.succinylbenzoate.derivatives	0.297
+AIT38302.1_LstE_Lipstatin_[none]	small.hydrophobic.aa	0.600

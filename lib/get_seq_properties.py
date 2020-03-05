@@ -19,9 +19,7 @@ import copy
 import random
 from pprint import pprint
 
-from antismash.common import fasta
-from antismash.common.secmet import AntismashDomain
-from antismash.modules.nrps_pks.results import NRPS_PKS_Results
+from lib import fasta
 
 class DataSet():
     chuck_dict = {"ser": 'pac',
