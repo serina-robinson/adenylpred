@@ -83,7 +83,7 @@ python3 adenylpred.py -v -g -i examples/daptomycin.gbk -o examples/daptomycin_pr
 
 Note
 -------
-This command-line tool was written in Python for rapid and scalable substrate specificity prediction. Please note it does not have all the features of [z.umn.edu/adenylpred](z.umn.edu/adenylpred). Predictions and probability scores may differ from the web application.
+This command-line version of AdenylPred does not have all the features of [z.umn.edu/adenylpred](z.umn.edu/adenylpred). Predictions and probability scores may differ from the web application. Please contact Serina Robinson (robinsonserinalee@gmail.com) with questions.
 
 Acknowledgements
 -------
@@ -91,7 +91,7 @@ This tool is the product of a collaboration between Dr. Larry Wackett’s lab at
 
 Key contributors
 -------
-* Serina Robinson (robi0916@umn.edu)
+* Serina Robinson (robinsonserinalee@gmail.com)
 * Barbara Terlouw
 * Marnix Medema
 * Larry Wackett
