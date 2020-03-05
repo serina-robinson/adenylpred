@@ -37,7 +37,7 @@ Or, from github.com, click the "clone or download" button and "Download ZIP"
 
 All python dependencies are specified in the `requirements.txt` file. To load all the requirements simply run:
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 You should then be able to run adenylpred as follows:
