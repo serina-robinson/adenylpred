@@ -43,7 +43,7 @@ pip3 install -r requirements.txt
 You should then be able to run adenylpred as follows:
 
 ```
-usage: adenylpred.py [-h] -i INPUT [-o OUTPUT] [-s] [-n] [-g]
+usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-s] [-n] [-g]
 
 Prediction tool for adenylate-forming enzyme substrate specificity
 
