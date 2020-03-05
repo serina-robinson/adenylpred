@@ -1,5 +1,9 @@
 AdenylPred
 ===========
+Welcome to the AdenylPred github repo! 
+
+AdenylPred is a substrate and function prediction tool for class I adenylate-forming enzymes. Class I adenylate-forming enzymes have diverse functions including the acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
+=======
 Welcome to the AdenylPred github repo! AdenylPred is a substrate and function prediction tool for class I adenylate-forming enzymes. Class I adenylate-forming enzymes have diverse functions including the acyl-CoA synthetases, NRPS A-domains, firefly luciferases, fatty acyl-AMP ligases, and β-lactone synthetases. These enzymes play critical roles in primary and secondary metabolism in all branches of the tree of life.
 
 The number of adenylate-forming enzymes in sequence databases (>700,000) far outnumber our capacity to experimentally characterize them. Since these enzymes activate a variety of fatty, aryl, and amino acid precursors in biosynthetic pathways, prediction of substrate can help inform the chemical structure of downstream metabolites. To meet this challenge, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence.
@@ -37,23 +41,25 @@ Or, from github.com, click the "clone or download" button and "Download ZIP"
 
 All python dependencies are specified in the `requirements.txt` file. To load all the requirements simply run:
 ```
+conda install -c bioconda hmmer2
+conda install -c bioconda muscle
 pip3 install -r requirements.txt
 ```
 
 You should then be able to run adenylpred as follows:
 
 ```
-usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-s] [-n] [-g]
+usage: python3 adenylpred.py [-h] -i INPUT [-o OUTPUT] [-v] [-s] [-n] [-g]
 
 Prediction tool for adenylate-forming enzyme substrate specificity
 
-arguments:
+optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
                         Input file (FASTA or GenBank format).
   -o OUTPUT, --output OUTPUT
                         Output file directory. Default is stdout
-  -s, --silent          Silences all progress updates to stdout
+  -v, --verbose         Verbose. Prints progress to stdout
   -n, --nucleotide      Nucleotide sequence
   -g, --genbank_input   Input is in GenBank format
 ```
@@ -65,17 +71,17 @@ Example Usages
 
 Predict substrates of A domains from a complete biosynthetic gene cluster FASTA file
 ```
-python3 adenylpred.py -i examples/lipstatin.fasta -o lipstatin_predictions.txt
+python3 adenylpred.py -v -i examples/lipstatin.fasta -o examples/lipstatin_predictions.txt
 ```
 
 Predict substrates for AMP-binding enzymes in a nucleotide FASTA file
 ```
-python3 adenylpred.py -i examples/lipstatin_nucleotide.fasta -n
+python3 adenylpred.py -v -n -i examples/lipstatin_nucleotide.fasta -o examples/lipstatin_nucleotide_predictions.txt
 ```
 
 Predict substrates from a GenBank file
 ```
-python3 adenylpred.py -i examples/daptomycin.gbk -g
+python3 adenylpred.py -v -g -i examples/daptomycin.gbk -o examples/daptomycin_predictions.txt
 ```
 
 Acknowledgements
