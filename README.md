@@ -5,7 +5,7 @@ Welcome to the AdenylPred github repo! AdenylPred is a substrate and function pr
 
 The number of adenylate-forming enzymes in sequence databases (>700,000) far outnumber our capacity to experimentally characterize them. Since these enzymes activate a variety of fatty, aryl, and amino acid precursors in biosynthetic pathways, prediction of substrate can help inform the chemical structure of downstream metabolites. To meet this challenge, AdenylPred was developed using a random forest machine learning approach to predict substrate specificity from amino acid sequence. For more information, see our paper in JBC:
 
-Robinson SL, Terlouw BR, Smith MD, Pidot SJ, Stinear TP, Medema MH, Wackett LP. Global analysis of adenylate-forming enzymes reveals β-lactone biosynthesis pathway in pathogenic Nocardia. J Biol Chem. 2020 Oct 30;295(44):14826-14839. doi: 10.1074/jbc.RA120.013528.(https://pubmed.ncbi.nlm.nih.gov/32826316/). PMID: 32826316.
+Robinson SL, Terlouw BR, Smith MD, Pidot SJ, Stinear TP, Medema MH, Wackett LP. Global analysis of adenylate-forming enzymes reveals β-lactone biosynthesis pathway in pathogenic Nocardia. J Biol Chem. 2020 Oct 30;295(44):14826-14839. doi: [10.1074/jbc.RA120.013528](https://pubmed.ncbi.nlm.nih.gov/32826316/). PMID: 32826316.
 
 ![](https://github.com/serina-robinson/adenylpred/blob/master/data/ml_workflow.png)
 
@@ -95,7 +95,7 @@ Cite us
 -------
 If you use either the web or command-line versions of AdenylPred, or any of the code associated, please cite us at: 
 
-Robinson SL, Terlouw BR, Smith MD, Pidot SJ, Stinear TP, Medema MH, Wackett LP. Global analysis of adenylate-forming enzymes reveals β-lactone biosynthesis pathway in pathogenic Nocardia. J Biol Chem. 2020 Oct 30;295(44):14826-14839. doi: 10.1074/jbc.RA120.013528(http://dx.doi.org/10.1074/jbc.RA120.013528). PMID: 32826316
+Robinson SL, Terlouw BR, Smith MD, Pidot SJ, Stinear TP, Medema MH, Wackett LP. Global analysis of adenylate-forming enzymes reveals β-lactone biosynthesis pathway in pathogenic Nocardia. J Biol Chem. 2020 Oct 30;295(44):14826-14839. doi: [10.1074/jbc.RA120.013528](http://dx.doi.org/10.1074/jbc.RA120.013528). PMID: 32826316
 
 Key contributors
 -------
