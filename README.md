@@ -85,7 +85,7 @@ python3 adenylpred.py -v -g -i examples/daptomycin.gbk -o examples/daptomycin_pr
 
 Note
 -------
-This command-line version of AdenylPred does not have all the features of [z.umn.edu/adenylpred](https://srobinson.shinyapps.io/AdenylPred/). Predictions and probability scores may differ from the web application. Please contact Serina Robinson (robinsonserinalee@gmail.com) with questions.
+This command-line version of AdenylPred does not have all the features of [z.umn.edu/adenylpred](https://srobinson.shinyapps.io/AdenylPred/). Predictions and probability scores may differ from the web application. Please contact Serina Robinson robinsonserinalee[at]gmail.com with questions.
 
 Acknowledgements
 -------
@@ -99,7 +99,7 @@ Robinson SL, Terlouw BR, Smith MD, Pidot SJ, Stinear TP, Medema MH, Wackett LP. 
 
 Key contributors
 -------
-* Serina Robinson (robinsonserinalee@gmail.com)
+* Serina Robinson robinsonserinalee[at]gmail.com
 * Barbara Terlouw
 * Marnix Medema
 * Larry Wackett
